@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sau.project.user.dao.CodeDao">
+<resultMap id="codeMap" type="code">
+    <result column="school_id" property="schoolId"></result>
+    <result column="school_name" property="schoolName"></result>
+    <result column="department_id" property="departmentId"></result>
+    <result column="department_name" property="departmentName"></result>
+    <result column="major_id" property="majorId"></result>
+    <result column="major_name" property="majorName"></result>
+    <result column="employment_status_id" property="employmentStatusId"></result>
+    <result column="employment_status_name" property="employmentStatusName"></result>
+</resultMap>
+    <select id="searchSchoolId" resultType="java.lang.Integer" parameterType="java.lang.String">
+        SELECT school_id
+        FROM t_school
+        WHERE school_name like #{schoolName}
+    </select>
+    <select id="searchDepartmentId" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT department_id
+        FROM t_department
+        WHERE department_name like #{departmentName}
+    </select>
+    <select id="searchMajorId" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT major_id
+        FROM t_major
+        WHERE major_name like #{majorName}
+    </select>
+    <select id="searchEmploymentStatusId" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT employment_status_id
+        FROM t_employment_status
+        WHERE employment_status_name like #{employmentStatusName}
+    </select>
+</mapper>

@@ -1,0 +1,22 @@
+body {
+    background: url("../../../image/4.jpg") no-repeat;
+    background-size: cover;
+    font-size: 16px;
+}
+#box{
+    background-color: #2aabd2;
+    width:25%;
+    margin-left: 36%;
+    padding-top: 3%;
+    padding-bottom: 1%;
+    margin-top: 13%
+}
+h2{
+    text-align: center;
+    padding-bottom: 5%;
+}
+label.control-label{
+    font-weight: normal;
+    font-size: 16px;
+    margin-left: 31%;
+}

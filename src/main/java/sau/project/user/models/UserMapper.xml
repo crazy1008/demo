@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sau.project.user.dao.UserDao">
+<resultMap id="userMap" type="user">
+    <id column="id" property="id"></id>
+    <result column="username" property="username"></result>
+    <result column="password" property="password"></result>
+    <result column="studentId" property="studentId"></result>
+    <result column="delivery_number" property="deliveryNumber"></result>
+</resultMap>
+    <select id="searchUser" resultMap="userMap" parameterType="user">
+        SELECT id,
+        username,
+        password,
+        studentId,
+        delivery_number
+        FROM t_graduate
+        WHERE username = #{username}
+    </select>
+    <update id="update" parameterType="user">
+        UPDATE t_graduate
+        SET studentId = #{studentId}
+        WHERE username =#{username} and password =#{password}
+    </update>
+    <select id="search" resultMap="userMap">
+        SELECT id,username,password,delivery_number
+        FROM t_graduate
+    </select>
+    <insert id="insert" parameterType="user">
+        INSERT INTO t_graduate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username!=null">
+                username,
+            </if>
+            <if test="password">
+                password,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="username!=null">
+                #{username},
+            </if>
+            <if test="password!=null">
+                #{password},
+            </if>
+        </trim>
+    </insert>
+    <select id="searchById" parameterType="java.lang.Integer" resultMap="userMap">
+        SELECT id,username,password
+        FROM t_graduate
+        WHERE id = #{id}
+    </select>
+    <update id="updateGraduate" parameterType="user">
+        UPDATE t_graduate
+        SET password = #{password}
+        WHERE username = #{username}
+    </update>
+    <update id="updateById" parameterType="user">
+        UPDATE t_graduate
+        SET delivery_number =#{deliveryNumber}
+        WHERE id = #{id}
+    </update>
+    <select id="searchByStudentId" parameterType="java.lang.Integer" resultType="java.lang.String">
+        SELECT delivery_number
+        FROM t_graduate
+        WHERE studentId = #{studentId}
+    </select>
+</mapper>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!-- 打印查询语句 -->
+		<setting name="logImpl" value="STDOUT_LOGGING" />
+	</settings>
+	<typeAliases>
+        <!--school-->
+		<typeAlias alias="school" type="sau.project.school.models.School" />
+		<typeAlias alias="student" type="sau.project.school.models.Student" />
+        <typeAlias alias="company" type="sau.project.school.models.Company" />
+        <typeAlias alias="joinArmy" type="sau.project.school.models.JoinArmy" />
+        <typeAlias alias="postgraduate" type="sau.project.school.models.Postgraduate" />
+        <typeAlias alias="civilServant" type="sau.project.school.models.CivilServant" />
+        <typeAlias alias="entrepreneurship" type="sau.project.school.models.Entrepreneurship" />
+
+        <!--user-->
+        <typeAlias alias="user" type="sau.project.user.models.User" />
+        <typeAlias alias="code" type="sau.project.user.models.Code" />
+        <!--backstage-->
+        <typeAlias type="sau.project.backstage.models.Admin" alias="admin"></typeAlias>
+        <typeAlias type="sau.project.backstage.models.Department" alias="department"></typeAlias>
+        <typeAlias type="sau.project.backstage.models.Major" alias="major"></typeAlias>
+        <typeAlias type="sau.project.backstage.models.SchoolName" alias="schoolName"></typeAlias>
+
+        <!--employers-->
+        <typeAlias type="sau.project.employers.models.Employers" alias="employers"></typeAlias>
+        <typeAlias type="sau.project.employers.models.JobPosition" alias="jobPosition"></typeAlias>
+        <typeAlias type="sau.project.employers.models.GroupCode" alias="groupCode"></typeAlias>
+	</typeAliases>
+	<!-- 配置分页插件 -->
+	<plugins>
+		<plugin interceptor="com.github.pagehelper.PageHelper">
+			<property name="dialect" value="mysql" />
+		</plugin>
+	</plugins>
+	<mappers>
+        <!--school-->
+		<mapper resource="sau/project/school/models/UserLoginMapper.xml" />
+		<mapper resource="sau/project/school/models/StudentMapper.xml" />
+        <mapper resource="sau/project/school/models/CompanyMapper.xml" />
+        <mapper resource="sau/project/school/models/JoinArmyMapper.xml" />
+        <mapper resource="sau/project/school/models/PostgraduateMapper.xml" />
+        <mapper resource="sau/project/school/models/CivilServantMapper.xml" />
+        <mapper resource="sau/project/school/models/EntrepreneurshipMapper.xml" />
+        <!--user-->
+        <mapper resource="sau/project/user/models/UserMapper.xml" />
+        <mapper resource="sau/project/user/models/CodeMapper.xml" />
+        <!--backstage-->
+        <mapper resource="sau/project/backstage/models/AdminMapper.xml" />
+
+
+        <!--employers-->
+        <mapper resource="sau/project/employers/models/EmployersMapper.xml"></mapper>
+        <mapper resource="sau/project/employers/models/JobPositionMapper.xml"></mapper>
+        <mapper resource="sau/project/employers/models/GroupCodeMapper.xml"></mapper>
+	</mappers>
+</configuration> 

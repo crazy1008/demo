@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="userLoginDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="sau.project.school.dao.UserLoginDao" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="userLoginService" class="sau.project.school.service.imp.UserLoginServiceImpl"></bean>
+	
+	<bean id="studentDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="sau.project.school.dao.StudentDao" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	<bean id="studentService" class="sau.project.school.service.imp.StudentServiceImpl"></bean>
+
+    <bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="sau.project.user.dao.UserDao" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    <bean id="userService" class="sau.project.user.service.imp.UserServiceImpl"></bean>
+
+    <bean id="codeDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="sau.project.user.dao.CodeDao" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    <bean id="codeService" class="sau.project.user.service.imp.CodeServiceImpl"></bean>
+
+    <bean id="adminDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="sau.project.backstage.dao.AdminDao" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    <bean id="adminService" class="sau.project.backstage.service.imp.AdminServiceImpl"></bean>
+
+    <bean id="employersDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="sau.project.employers.dao.EmployersDao" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+    <bean id="employersService" class="sau.project.employers.service.imp.EmployersServiceImpl"></bean>
+
+</beans>

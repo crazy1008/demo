@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sau.project.employers.dao.EmployersDao">
+    <resultMap id="employersMap" type="employers">
+        <id column="id" property="id"></id>
+        <result column="username" property="username"></result>
+        <result column="password" property="password"></result>
+        <result column="job_id" property="jobId"></result>
+    </resultMap>
+    <select id="searchEmployers" resultMap="employersMap" parameterType="employers">
+        SELECT id,username,password,job_id
+        FROM t_employers
+        WHERE username = #{username}
+    </select>
+    <select id="search" resultMap="employersMap">
+        SELECT id,username,password,job_id
+        FROM t_employers
+    </select>
+    <insert id="insert" parameterType="employers">
+        INSERT INTO t_employers
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username!=null">
+                username,
+            </if>
+            <if test="password">
+                password,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="username!=null">
+                #{username},
+            </if>
+            <if test="password!=null">
+                #{password},
+            </if>
+        </trim>
+    </insert>
+    <select id="selectByEmployersId" parameterType="java.lang.Integer" resultMap="employersMap">
+        SELECT id,username,password,job_id
+        FROM t_employers
+        WHERE id = #{id}
+    </select>
+    <update id="updateEmployers" parameterType="employers">
+        UPDATE t_employers
+        SET password = #{password}
+        WHERE username = #{username}
+    </update>
+    <update id="updateEmployersById" parameterType="employers">
+        UPDATE t_employers
+        SET job_id = #{jobId}
+        WHERE id = #{id}
+    </update>
+</mapper>

@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sau.project.school.dao.StudentDao">
+	<resultMap type="sau.project.school.models.Student" id="studentMap">
+		<result column="student_id" property="studentId" />
+		<result column="student_school_id" property="studentSchoolId" />
+		<result column="student_department_id" property="studentDepartmentId" />
+		<result column="student_major_id" property="studentMajorId" />
+		<result column="school_id" property="schoolId" />
+		<result column="department_id" property="departmentId" />
+		<result column="major_id" property="majorId" />
+		<result column="school_name" property="schoolName" />
+		<result column="department_name" property="departmentName" />
+		<result column="student_sex" property="studentSex" />
+		<result column="major_name" property="majorName" />
+		<result column="student_no" property="studentNo" />
+		<result column="student_name" property="studentName" />
+		<result column="student_class" property="studentClass" />
+		<result column="student_openDate" property="studentOpenDate" />
+		<result column="student_expireDate" property="studentExpireDate" />
+		<result column="employment_status_name" property="employmentStatusName" />
+		<result column="employment_status_id" property="employmentStatusId" />
+		<result column="state_id" property="stateId" />
+        <result column="two_state_id" property="twoStateId" />
+        <result column="three_state_id" property="threeStateId" />
+        <result column="four_state_id" property="fourStateId" />
+        <result column="five_state_id" property="fiveStateId" />
+        <result column="six_state_id" property="sixStateId" />
+	</resultMap>
+	<select id="searchAll" resultMap="studentMap">
+		SELECT
+		student_id,
+		student_no,
+		school_name,
+		department_name,
+		major_name,
+		student_name,
+		student_sex,
+		student_class,
+		student_openDate,
+		student_expireDate,
+		employment_status_name,
+		employment_status_id,
+		state_id,
+		two_state_id,
+		three_state_id,
+		four_state_id,
+		five_state_id,
+		six_state_id
+		FROM
+		t_student student,
+		t_school school,
+		t_department department,
+		t_major major,
+		t_employment_status employment
+		WHERE
+		student.student_school_id = school.school_id
+		AND student.student_department_id = department.department_id
+		AND student.student_major_id = major.major_id
+		AND student.student_employment_status_id = employment.employment_status_id
+	</select>
+	<select id="search" resultMap="studentMap" parameterType="student">
+		SELECT *
+		FROM(
+		SELECT
+		student_id,
+		student_no,
+		school_name,
+		department_name,
+		major_name,
+		student_name,
+		student_sex,
+		student_class,
+		student_openDate,
+		student_expireDate,
+		employment_status_name,
+        employment_status_id,
+	    state_id,
+        two_state_id,
+        three_state_id,
+        four_state_id,
+        five_state_id,
+        six_state_id
+		FROM
+		t_student student,
+		t_school school,
+		t_department department,
+		t_major major,
+		t_employment_status employment
+		where
+		student.student_school_id = school.school_id
+		AND student.student_department_id = department.department_id
+		AND student.student_major_id = major.major_id
+		AND student.student_employment_status_id = employment.employment_status_id) ss
+		<where>
+			<if test="studentName!=null and studentName!=''">
+				AND ss.student_name like #{studentName}
+			</if>
+			<if test="studentNo!=null and studentNo!=''">
+				AND ss.student_no = #{studentNo}
+			</if>
+			<if test="majorName!=null and majorName!=''">
+				AND ss.major_name like #{majorName}
+			</if>
+			<if test="departmentName!=null and departmentName!=''">
+				AND ss.department_name like #{departmentName}
+			</if>
+			<if test="schoolName!=null and schoolName!=''">
+				AND ss.school_name like CONCAT(CONCAT("%",#{schoolName},"%"))
+			</if>
+			<if test="employmentStatusName!=null and employmentStatusName!=''">
+				AND ss.employment_status_name = #{employmentStatusName}
+			</if>
+		</where>
+	</select>
+    <insert id="insertStudent" parameterType="student">
+        <selectKey resultType="java.lang.Integer" keyProperty="studentId" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO t_student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="schoolId!=null and schoolId!=''">
+                student_school_id,
+            </if>
+            <if test="departmentId!=null and departmentId!=''">
+                student_department_id,
+            </if>
+            <if test="majorId!=null and majorId!=''">
+                student_major_id,
+            </if><if test="studentNo!=null">
+            student_no,
+        </if>
+            <if test="studentName!=null">
+                student_name,
+            </if>
+            <if test="studentSex!=null">
+                student_sex,
+            </if>
+            <if test="studentClass!=null">
+                student_class,
+            </if>
+            <if test="studentOpenDate!=null">
+                student_openDate,
+            </if>
+            <if test="studentExpireDate!=null">
+                student_ExpireDate,
+            </if>
+            <if test="employmentStatusId!=null and employmentStatusId!=''">
+                student_employment_status_id,
+            </if>
+            <if test="stateId!=null">
+                state_id,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="schoolId!=null and schoolId !=''">
+                #{schoolId},
+            </if>
+            <if test="departmentId!=null and departmentId !=''">
+                #{departmentId},
+            </if>
+            <if test="majorId!=null and majorId!=''">
+                #{majorId},
+            </if>
+            <if test="studentNo!=null">
+                #{studentNo},
+            </if>
+            <if test="studentName!=null">
+                #{studentName},
+            </if>
+            <if test="studentSex!=null">
+                #{studentSex},
+            </if>
+            <if test="studentClass!=null">
+                #{studentClass},
+            </if>
+            <if test="studentOpenDate!=null">
+                #{studentOpenDate},
+            </if>
+            <if test="studentExpireDate!=null">
+                #{studentExpireDate},
+            </if>
+            <if test="employmentStatusId!=null and employmentStatusId!=''">
+                #{employmentStatusId},
+            </if>
+            <if test="stateId!=null">
+                #{stateId},
+            </if>
+        </trim>
+    </insert>
+    <select id="seeInformation" parameterType="java.lang.Integer" resultMap="studentMap">
+       SELECT
+		student_id,
+		student_no,
+		school_name,
+		department_name,
+		major_name,
+		student_name,
+		student_sex,
+		student_class,
+		student_openDate,
+		student_expireDate,
+		employment_status_name,
+		employment_status_id,
+		state_id,
+		two_state_id,
+		three_state_id,
+		four_state_id,
+		five_state_id,
+		six_state_id
+		FROM
+		t_student student,
+		t_school school,
+		t_department department,
+		t_major major,
+		t_employment_status employment
+		WHERE
+		student.student_school_id = school.school_id
+		AND student.student_department_id = department.department_id
+		AND student.student_major_id = major.major_id
+		AND student.student_employment_status_id = employment.employment_status_id
+		AND student_id =#{studentId}
+    </select>
+    <update id="updateUser" parameterType="student">
+        UPDATE t_student
+        <set>
+            <if test="schoolId!=null and schoolId !=''">
+                student_school_id =#{schoolId},
+            </if>
+            <if test="departmentId!=null and departmentId !=''">
+                student_department_id = #{departmentId},
+            </if>
+            <if test="majorId!=null and majorId!=''">
+                student_major_id = #{majorId},
+            </if>
+            <if test="studentNo!=null">
+                student_no = #{studentNo},
+            </if>
+            <if test="studentName!=null">
+                student_name = #{studentName},
+            </if>
+            <if test="studentSex!=null">
+                student_sex = #{studentSex},
+            </if>
+            <if test="studentClass!=null">
+                student_class = #{studentClass},
+            </if>
+            <if test="studentOpenDate!=null">
+                student_openDate = #{studentOpenDate},
+            </if>
+            <if test="studentExpireDate!=null">
+                student_expireDate = #{studentExpireDate},
+            </if>
+            <if test="employmentStatusId!=null and employmentStatusId!=''">
+                student_employment_status_id = #{employmentStatusId},
+            </if>
+            <if test="stateId!=null">
+                state_id = #{stateId},
+            </if>
+        </set>
+    </update>
+    <update id="updateStudentById" parameterType="company">
+        UPDATE t_student
+        SET state_id = #{companyId}
+        WHERE student_id = #{studentId}
+    </update>
+    <update id="updateStudentPostgraduateById" parameterType="postGraduate">
+        UPDATE t_student
+        SET state_id = #{postgraduateId}
+        WHERE student_id = #{studentId}
+    </update>
+    <update id="updateStudentJoinArmyById" parameterType="joinArmy">
+        UPDATE t_student
+        SET state_id = #{joinArmyId}
+        WHERE student_id = #{studentId}
+    </update>
+    <update id="updateStudentCivilServantById" parameterType="civilServant">
+        UPDATE t_student
+        SET state_id = #{civilServantId}
+        WHERE student_id = #{studentId}
+    </update>
+    <update id="updateStudentEntrepreneurshipById" parameterType="entrepreneurship">
+        UPDATE t_student
+        SET state_id = #{entrepreneurshipId}
+        WHERE student_id = #{studentId}
+    </update>
+    <select id= "searchListById" resultMap="studentMap">
+        SELECT student_id,
+		student_no,
+		school_name,
+		department_name,
+		major_name,
+		student_name,
+		student_sex,
+		student_class,
+		student_openDate,
+		student_expireDate,
+		employment_status_name,
+		employment_status_id,
+		state_id,
+        two_state_id,
+        three_state_id,
+        four_state_id,
+        five_state_id,
+        six_state_id
+		FROM
+		t_student student,
+		t_school school,
+		t_department department,
+		t_major major,
+		t_employment_status employment
+		WHERE
+		student.student_school_id = school.school_id
+		AND student.student_department_id = department.department_id
+		AND student.student_major_id = major.major_id
+		AND student.student_employment_status_id = employment.employment_status_id
+		AND student_id in
+        <foreach collection="list" open="(" close=")" item="item" index="index" separator=",">
+            #{item}
+        </foreach>
+    </select>
+    <update id="updateTwoStudentById" parameterType="company">
+        UPDATE t_student
+        SET two_state_id = #{companyId}
+        WHERE student_id = #{studentId}
+    </update>
+    <update id="updateThreeStudentById" parameterType="company">
+        UPDATE t_student
+        SET three_state_id = #{companyId}
+        WHERE student_id = #{studentId}
+    </update>
+    <update id="updateFourStudentById" parameterType="company">
+        UPDATE t_student
+        SET four_state_id = #{companyId}
+        WHERE student_id = #{studentId}
+    </update>
+    <update id="updateFiveStudentById" parameterType="company">
+        UPDATE t_student
+        SET five_state_id = #{companyId}
+        WHERE student_id = #{studentId}
+    </update>
+    <update id="updateSixStudentById" parameterType="company">
+        UPDATE t_student
+        SET six_state_id = #{companyId}
+        WHERE student_id = #{studentId}
+    </update>
+</mapper>

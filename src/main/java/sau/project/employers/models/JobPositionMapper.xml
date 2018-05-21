@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sau.project.employers.dao.EmployersDao">
+    <resultMap id="jobPositionMap" type="jobPosition">
+        <id column="job_position_id" property="jobPositionId"></id>
+        <result column="job_position_major" property="jobPositionMajor"></result>
+        <result column="job_position_name" property="jobPositionName"></result>
+        <result column="job_position_number" property="jobPositionNumber"></result>
+        <result column="job_position_experience" property="jobPositionExperience"></result>
+        <result column="job_position_direction" property="jobPositionDirection"></result>
+        <result column="job_position_local" property="jobPositionLocal"></result>
+        <result column="job_position_education" property="jobPositionEducation"></result>
+        <result column="job_position_business" property="jobPositionBusiness"></result>
+        <result column="company_name" property="companyName"></result>
+        <result column="delivery" property="delivery"></result>
+        <result column="job_salary" property="jobSalary"></result>
+    </resultMap>
+    <select id="searchJobPosition" resultMap="jobPositionMap">
+        SELECT job_position_id,
+               job_position_major,
+               job_position_name,
+               job_position_number,
+               job_position_experience,
+               job_position_direction,
+               job_position_local,
+               job_position_education ,
+               job_position_business,
+               company_name,
+               delivery,
+               job_salary
+        FROM t_job_position
+    </select>
+    <select id="searchJobPositionById"  resultMap="jobPositionMap">
+        SELECT job_position_id,
+               job_position_major,
+               job_position_name,
+               job_position_number,
+               job_position_experience,
+               job_position_direction,
+               job_position_local,
+               job_position_education ,
+               job_position_business,
+               company_name,
+               delivery,
+               job_salary
+        FROM t_job_position
+        <where>
+                job_position_id in
+               <foreach collection="list" open="(" close=")" item="item" index="index" separator=",">
+                   #{item}
+               </foreach>
+        </where>
+    </select>
+    <select id="searchById" parameterType="java.lang.Integer" resultMap="jobPositionMap">
+        SELECT job_position_id,
+               job_position_major,
+               job_position_name,
+               job_position_number,
+               job_position_experience,
+               job_position_direction,
+               job_position_local,
+               job_position_education ,
+               job_position_business,
+               company_name,
+               delivery,
+               job_salary
+        FROM t_job_position
+        WHERE job_position_id =#{jobId}
+    </select>
+    <delete id="deJobPosition" parameterType="java.lang.Integer">
+        DELETE FROM t_job_position
+        WHERE job_position_id =#{jobId}
+    </delete>
+    <insert id="addJobPosition" parameterType="jobPosition">
+        <selectKey resultType="java.lang.Integer" keyProperty="jobPositionId" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO t_job_position
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="jobPositionMajor!=null">
+                job_position_major,
+            </if>
+            <if test="jobPositionName!=null">
+                job_position_name,
+            </if>
+            <if test="jobPositionNumber!=null and jobPositionNumber!=''">
+                job_position_number,
+            </if>
+            <if test="jobPositionExperience!=null">
+                job_position_experience,
+            </if>
+            <if test="jobPositionDirection!=null">
+                job_position_direction,
+            </if>
+            <if test="jobPositionLocal!=null">
+                job_position_local,
+            </if>
+            <if test="jobPositionEducation!=null">
+                job_position_education,
+            </if>
+            <if test="jobPositionBusiness!=null">
+                job_position_business,
+            </if>
+            <if test="companyName!=null">
+                company_name,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="jobPositionMajor!=null">
+                #{jobPositionMajor},
+            </if>
+            <if test="jobPositionName!=null">
+                #{jobPositionName},
+            </if>
+            <if test="jobPositionNumber!=null and jobPositionNumber!=''">
+                #{jobPositionNumber},
+            </if>
+            <if test="jobPositionExperience!=null">
+                #{jobPositionExperience},
+            </if>
+            <if test="jobPositionDirection!=null">
+                #{jobPositionDirection},
+            </if>
+            <if test="jobPositionLocal!=null">
+                #{jobPositionLocal},
+            </if>
+            <if test="jobPositionEducation!=null">
+                #{jobPositionEducation},
+            </if>
+            <if test="jobPositionBusiness!=null">
+                #{jobPositionBusiness},
+            </if>
+            <if test="companyName!=null">
+                #{companyName},
+            </if>
+        </trim>
+    </insert>
+    <update id="upJobPosition" parameterType="jobPosition">
+        UPDATE t_job_position
+        <set>
+            <if test="jobPositionMajor!=null">
+                job_position_major = #{jobPositionMajor},
+            </if>
+            <if test="jobPositionName!=null">
+                job_position_name = #{jobPositionName},
+            </if>
+            <if test="jobPositionNumber!=null and jobPositionNumber!=''">
+                job_position_number = #{jobPositionNumber},
+            </if>
+            <if test="jobPositionExperience!=null">
+                job_position_experience = #{jobPositionExperience},
+            </if>
+            <if test="jobPositionDirection!=null">
+                job_position_direction = #{jobPositionDirection},
+            </if>
+            <if test="jobPositionLocal!=null">
+                job_position_local = #{jobPositionLocal},
+            </if>
+            <if test="jobPositionEducation!=null">
+                job_position_education = #{jobPositionEducation},
+            </if>
+            <if test="jobPositionBusiness!=null">
+                job_position_business = #{jobPositionBusiness},
+            </if>
+            <if test="companyName!=null">
+                company_name = #{companyName},
+            </if>
+            <if test="delivery!=null">
+                delivery = #{delivery},
+            </if>
+        </set>
+        WHERE job_position_id = #{jobPositionId}
+    </update>
+</mapper>

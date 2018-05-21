@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sau.project.school.dao.StudentDao">
+	<resultMap type="company"
+		id="companyMap">
+		<result column="company_id" property="companyId" />
+		<result column="company_profile" property="companyProfile" />
+		<result column="company_name" property="companyName" />
+		<result column="chairman_company" property="chairmanCompany" />
+		<result column="company_environment" property="companyEnvironment" />
+		<result column="company_salary" property="companySalary" />
+		<result column="engage_work" property="engageWork" />
+		<result column="company_position" property="companyPosition" />
+	</resultMap>
+	<select id="obtainEmployment" resultMap="companyMap" parameterType="java.lang.Integer">
+		SELECT company_id,
+		company_profile,
+		company_name,
+		chairman_company,
+		company_position,
+		company_salary,
+		engage_work,
+		company_environment
+		FROM t_company company
+		where company.company_id =#{stateId}
+	</select>
+    <select id="obtainTwoEmployment" resultMap="companyMap" parameterType="java.lang.Integer">
+        SELECT company_id,
+        company_profile,
+        company_name,
+        chairman_company,
+        company_position,
+        company_salary,
+        engage_work,
+        company_environment
+        FROM t_two_company company
+        where company.company_id =#{twoStateId}
+    </select>
+    <select id="obtainThreeEmployment" resultMap="companyMap" parameterType="java.lang.Integer">
+        SELECT company_id,
+        company_profile,
+        company_name,
+        chairman_company,
+        company_position,
+        company_salary,
+        engage_work,
+        company_environment
+        FROM t_three_company company
+        where company.company_id =#{threeStateId}
+    </select>
+    <select id="obtainFourEmployment" resultMap="companyMap" parameterType="java.lang.Integer">
+        SELECT company_id,
+        company_profile,
+        company_name,
+        chairman_company,
+        company_position,
+        company_salary,
+        engage_work,
+        company_environment
+        FROM t_four_company company
+        where company.company_id =#{fourStateId}
+    </select>
+    <select id="obtainFiveEmployment" resultMap="companyMap" parameterType="java.lang.Integer">
+        SELECT company_id,
+        company_profile,
+        company_name,
+        chairman_company,
+        company_position,
+        company_salary,
+        engage_work,
+        company_environment
+        FROM t_five_company company
+        where company.company_id =#{fiveStateId}
+    </select>
+    <select id="obtainSixEmployment" resultMap="companyMap" parameterType="java.lang.Integer">
+        SELECT company_id,
+        company_profile,
+        company_name,
+        chairman_company,
+        company_position,
+        company_salary,
+        engage_work,
+        company_environment
+        FROM t_six_company company
+        where company.company_id =#{sixStateId}
+    </select>
+    <insert id="insertCompany" parameterType="company">
+        INSERT INTO t_company
+        <selectKey resultType="java.lang.Integer" keyProperty="companyId" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyProfile!=null">
+                company_profile,
+            </if>
+            <if test="companyName!=null">
+                company_name,
+            </if>
+            <if test="chairmanCompany!=null">
+                chairman_company,
+            </if>
+            <if test="companyEnvironment!=null">
+                company_environment,
+            </if>
+            <if test="companyPosition!=null">
+                company_position,
+            </if>
+            <if test="companySalary!=null and companySalary !=''">
+                company_salary,
+            </if>
+            <if test="engageWork!=null">
+                engage_work,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="companyProfile!=null">
+                #{companyProfile},
+            </if>
+            <if test="companyName!=null">
+                #{companyName},
+            </if>
+            <if test="chairmanCompany!=null">
+                #{chairmanCompany},
+            </if>
+            <if test="companyEnvironment!=null">
+                #{companyEnvironment},
+            </if>
+            <if test="companyPosition!=null">
+                #{companyPosition},
+            </if>
+            <if test="companySalary!=null and companySalary !=''">
+                #{companySalary},
+            </if>
+            <if test="engageWork!=null">
+                #{engageWork},
+            </if>
+        </trim>
+    </insert>
+    <insert id="insertTwoCompany" parameterType="company">
+        INSERT INTO t_two_company
+        <selectKey resultType="java.lang.Integer" keyProperty="companyId" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyProfile!=null">
+                company_profile,
+            </if>
+            <if test="companyName!=null">
+                company_name,
+            </if>
+            <if test="chairmanCompany!=null">
+                chairman_company,
+            </if>
+            <if test="companyEnvironment!=null">
+                company_environment,
+            </if>
+            <if test="companyPosition!=null">
+                company_position,
+            </if>
+            <if test="companySalary!=null and companySalary !=''">
+                company_salary,
+            </if>
+            <if test="engageWork!=null">
+                engage_work,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="companyProfile!=null">
+                #{companyProfile},
+            </if>
+            <if test="companyName!=null">
+                #{companyName},
+            </if>
+            <if test="chairmanCompany!=null">
+                #{chairmanCompany},
+            </if>
+            <if test="companyEnvironment!=null">
+                #{companyEnvironment},
+            </if>
+            <if test="companyPosition!=null">
+                #{companyPosition},
+            </if>
+            <if test="companySalary!=null and companySalary !=''">
+                #{companySalary},
+            </if>
+            <if test="engageWork!=null">
+                #{engageWork},
+            </if>
+        </trim>
+    </insert>
+    <insert id="insertThreeCompany" parameterType="company">
+        INSERT INTO t_three_company
+        <selectKey resultType="java.lang.Integer" keyProperty="companyId" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyProfile!=null">
+                company_profile,
+            </if>
+            <if test="companyName!=null">
+                company_name,
+            </if>
+            <if test="chairmanCompany!=null">
+                chairman_company,
+            </if>
+            <if test="companyEnvironment!=null">
+                company_environment,
+            </if>
+            <if test="companyPosition!=null">
+                company_position,
+            </if>
+            <if test="companySalary!=null and companySalary !=''">
+                company_salary,
+            </if>
+            <if test="engageWork!=null">
+                engage_work,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="companyProfile!=null">
+                #{companyProfile},
+            </if>
+            <if test="companyName!=null">
+                #{companyName},
+            </if>
+            <if test="chairmanCompany!=null">
+                #{chairmanCompany},
+            </if>
+            <if test="companyEnvironment!=null">
+                #{companyEnvironment},
+            </if>
+            <if test="companyPosition!=null">
+                #{companyPosition},
+            </if>
+            <if test="companySalary!=null and companySalary !=''">
+                #{companySalary},
+            </if>
+            <if test="engageWork!=null">
+                #{engageWork},
+            </if>
+        </trim>
+    </insert>
+    <insert id="insertFourCompany" parameterType="company">
+        INSERT INTO t_four_company
+        <selectKey resultType="java.lang.Integer" keyProperty="companyId" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyProfile!=null">
+                company_profile,
+            </if>
+            <if test="companyName!=null">
+                company_name,
+            </if>
+            <if test="chairmanCompany!=null">
+                chairman_company,
+            </if>
+            <if test="companyEnvironment!=null">
+                company_environment,
+            </if>
+            <if test="companyPosition!=null">
+                company_position,
+            </if>
+            <if test="companySalary!=null and companySalary !=''">
+                company_salary,
+            </if>
+            <if test="engageWork!=null">
+                engage_work,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="companyProfile!=null">
+                #{companyProfile},
+            </if>
+            <if test="companyName!=null">
+                #{companyName},
+            </if>
+            <if test="chairmanCompany!=null">
+                #{chairmanCompany},
+            </if>
+            <if test="companyEnvironment!=null">
+                #{companyEnvironment},
+            </if>
+            <if test="companyPosition!=null">
+                #{companyPosition},
+            </if>
+            <if test="companySalary!=null and companySalary !=''">
+                #{companySalary},
+            </if>
+            <if test="engageWork!=null">
+                #{engageWork},
+            </if>
+        </trim>
+    </insert>
+    <insert id="insertFiveCompany" parameterType="company">
+        INSERT INTO t_five_company
+        <selectKey resultType="java.lang.Integer" keyProperty="companyId" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyProfile!=null">
+                company_profile,
+            </if>
+            <if test="companyName!=null">
+                company_name,
+            </if>
+            <if test="chairmanCompany!=null">
+                chairman_company,
+            </if>
+            <if test="companyEnvironment!=null">
+                company_environment,
+            </if>
+            <if test="companyPosition!=null">
+                company_position,
+            </if>
+            <if test="companySalary!=null and companySalary !=''">
+                company_salary,
+            </if>
+            <if test="engageWork!=null">
+                engage_work,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="companyProfile!=null">
+                #{companyProfile},
+            </if>
+            <if test="companyName!=null">
+                #{companyName},
+            </if>
+            <if test="chairmanCompany!=null">
+                #{chairmanCompany},
+            </if>
+            <if test="companyEnvironment!=null">
+                #{companyEnvironment},
+            </if>
+            <if test="companyPosition!=null">
+                #{companyPosition},
+            </if>
+            <if test="companySalary!=null and companySalary !=''">
+                #{companySalary},
+            </if>
+            <if test="engageWork!=null">
+                #{engageWork},
+            </if>
+        </trim>
+    </insert>
+    <insert id="insertSixCompany" parameterType="company">
+        INSERT INTO t_six_company
+        <selectKey resultType="java.lang.Integer" keyProperty="companyId" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyProfile!=null">
+                company_profile,
+            </if>
+            <if test="companyName!=null">
+                company_name,
+            </if>
+            <if test="chairmanCompany!=null">
+                chairman_company,
+            </if>
+            <if test="companyEnvironment!=null">
+                company_environment,
+            </if>
+            <if test="companyPosition!=null">
+                company_position,
+            </if>
+            <if test="companySalary!=null and companySalary !=''">
+                company_salary,
+            </if>
+            <if test="engageWork!=null">
+                engage_work,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="companyProfile!=null">
+                #{companyProfile},
+            </if>
+            <if test="companyName!=null">
+                #{companyName},
+            </if>
+            <if test="chairmanCompany!=null">
+                #{chairmanCompany},
+            </if>
+            <if test="companyEnvironment!=null">
+                #{companyEnvironment},
+            </if>
+            <if test="companyPosition!=null">
+                #{companyPosition},
+            </if>
+            <if test="companySalary!=null and companySalary !=''">
+                #{companySalary},
+            </if>
+            <if test="engageWork!=null">
+                #{engageWork},
+            </if>
+        </trim>
+    </insert>
+</mapper>

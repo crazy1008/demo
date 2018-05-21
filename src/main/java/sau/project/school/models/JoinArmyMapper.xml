@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sau.project.school.dao.StudentDao">
+    <resultMap id="joinArmyMap" type="joinArmy">
+        <id column="join_army_id" property="joinArmyId"></id>
+        <result column="join_army_military_region" property="joinArmyMilitaryRegion"></result>
+        <result column="join_army_arms" property="joinArmyArms"></result>
+        <result column="join_army_leadership" property="joinArmyLeadership"></result>
+    </resultMap>
+    <select id="joinArmy" resultMap="joinArmyMap" parameterType="java.lang.Integer" >
+        SELECT join_army_id,
+        join_army_military_region,
+        join_army_arms,
+        join_army_leadership
+        FROM t_join_army
+        WHERE join_army_id =#{stateId}
+    </select>
+    <insert id="insertJoinArmy" parameterType="joinArmy">
+        INSERT INTO t_join_army
+        <selectKey resultType="java.lang.Integer" keyProperty="joinArmyId" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="joinArmyMilitaryRegion!=null">
+                join_army_military_region,
+            </if>
+            <if test="joinArmyArms!=null">
+                join_army_arms,
+            </if>
+            <if test="joinArmyLeadership!=null">
+                join_army_leadership,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="joinArmyMilitaryRegion!=null">
+                #{joinArmyMilitaryRegion},
+            </if>
+            <if test="joinArmyArms!=null">
+                #{joinArmyArms},
+            </if>
+            <if test="joinArmyLeadership!=null">
+                #{joinArmyLeadership},
+            </if>
+        </trim>
+    </insert>
+</mapper>

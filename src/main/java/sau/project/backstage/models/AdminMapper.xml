@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sau.project.backstage.dao.AdminDao">
+    <resultMap id="adminMap" type="admin">
+        <id column="id" property="id"></id>
+        <result column="username" property="username"></result>
+        <result column="password" property="password"></result>
+    </resultMap>
+    <resultMap id="schoolNameMap" type="schoolName">
+        <id column="school_id" property="schoolId"></id>
+        <result column="school_name" property="schoolName"></result>
+    </resultMap>
+    <resultMap id="departmentMap" type="department">
+        <id column="department_id" property="departmentId"></id>
+        <result column="department_name" property="departmentName"></result>
+    </resultMap>
+    <resultMap id="majorMap" type="major">
+        <id column="major_id" property="majorId"></id>
+        <result column="major_name" property="majorName"></result>
+    </resultMap>
+    <select id="searchAdmin" parameterType="admin" resultMap="adminMap">
+        SELECT username,password
+        FROM t_admin
+        WHERE username = #{username}
+    </select>
+    <select id="searchSchoolName" parameterType="schoolName" resultMap="schoolNameMap">
+        SELECT school_id,school_name
+        FROM t_school
+        WHERE school_name like #{schoolName}
+    </select>
+    <select id="searchDepartment" parameterType="department" resultMap="departmentMap">
+        SELECT department_id,department_name
+        FROM t_department
+        WHERE department_name like #{departmentName}
+    </select>
+    <select id="searchMajor" parameterType="major" resultMap="majorMap">
+        SELECT major_id,major_name
+        FROM t_major
+        WHERE major_name like #{majorName}
+    </select>
+    <insert id="insertSchoolName" parameterType="schoolName">
+        INSERT INTO t_school
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="schoolName!=null">
+                school_name,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="schoolName!=null">
+                #{schoolName},
+            </if>
+        </trim>
+    </insert>
+    <insert id="insertDepartment" parameterType="department">
+        INSERT INTO t_department
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="departmentName!=null">
+                department_name,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="departmentName!=null">
+                #{departmentName},
+            </if>
+        </trim>
+    </insert>
+    <insert id="insertMajor" parameterType="major">
+        INSERT INTO t_major
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="majorName!=null">
+                major_name,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="majorName!=null">
+                #{majorName},
+            </if>
+        </trim>
+    </insert>
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM t_graduate
+        WHERE id = #{id}
+    </delete>
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        DELETE FROM t_user
+        WHERE id = #{id}
+    </delete>
+    <delete id="deleteEmployers" parameterType="java.lang.Integer">
+        DELETE FROM t_employers
+        WHERE id = #{id}
+    </delete>
+</mapper>

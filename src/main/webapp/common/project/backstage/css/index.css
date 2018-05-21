@@ -1,0 +1,32 @@
+.table-bordered > tbody > tr > td {
+    border: 1px solid #0c0b0b;
+}
+
+.table-bordered > thead > tr > th {
+    border: 1px solid #0c0b0b;
+}
+
+.table > thead:first-child > tr:first-child > th {
+    border-top: 1px solid #0c0b0b;
+}
+
+input {
+    height: 25px;
+}
+
+label {
+    padding-left: 0px;
+    font-size: 14px;
+    font-weight: normal;
+}
+thead>tr>th{
+    font-weight: normal;
+    color: #c55555;
+}
+label.error {
+    font-size: 12px;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    -webkit-text-fill-color: #333 !important;
+}

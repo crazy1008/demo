@@ -1,0 +1,24 @@
+.table-bordered > tbody > tr > td {
+    border: 1px solid #0c0b0b;
+}
+
+.table-bordered > thead > tr > th {
+    border: 1px solid #0c0b0b;
+}
+
+.table > thead:first-child > tr:first-child > th {
+    border-top: 1px solid #0c0b0b;
+}
+
+input {
+    height: 25px;
+}
+
+label {
+    font-size: 16px;
+    font-weight: normal;
+}
+thead>tr>th{
+    font-weight: normal;
+    color: #c55555;
+}

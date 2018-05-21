@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sau.project.school.dao.StudentDao">
+<resultMap id="entrepreneurshipMap" type="entrepreneurship">
+    <id column="entrepreneurship_id" property="entrepreneurshipId"></id>
+    <result column="entrepreneurship_name" property="entrepreneurshipName"></result>
+    <result column="entrepreneurship_chairman" property="entrepreneurshipChairman"></result>
+    <result column="entrepreneurship_ceo" property="entrepreneurshipCeo"></result>
+    <result column="entrepreneurship_cto" property="entrepreneurshipCto"></result>
+    <result column="entrepreneurship_cfo" property="entrepreneurshipCfo"></result>
+    <result column="entrepreneurship_number" property="entrepreneurshipNumber"></result>
+    <result column="entrepreneurship_registered_capital" property="entrepreneurshipRegisteredCapital"></result>
+    <result column="entrepreneurship_direction" property="entrepreneurshipDirection"></result>
+</resultMap>
+    <select id="entrepreneurship" resultMap="entrepreneurshipMap" parameterType="java.lang.Integer">
+        SELECT entrepreneurship_id,
+        entrepreneurship_name,
+        entrepreneurship_chairman,
+        entrepreneurship_ceo,
+        entrepreneurship_cto,
+        entrepreneurship_cfo,
+        entrepreneurship_number,
+        entrepreneurship_registered_capital,
+        entrepreneurship_direction
+        FROM t_entrepreneurship
+        WHERE entrepreneurship_id = #{stateId}
+    </select>
+    <insert id="insertEntrepreneurship" parameterType="entrepreneurship">
+        INSERT INTO t_entrepreneurship
+        <selectKey resultType="java.lang.Integer" keyProperty="entrepreneurshipId" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="entrepreneurshipName!=null">
+                entrepreneurship_name,
+            </if>
+            <if test="entrepreneurshipChairman!=null">
+                entrepreneurship_chairman,
+            </if>
+            <if test="entrepreneurshipCeo!=null">
+                entrepreneurship_ceo,
+            </if>
+            <if test="entrepreneurshipCto!=null">
+                entrepreneurship_cto,
+            </if>
+            <if test="entrepreneurshipCfo!=null">
+                entrepreneurship_cfo,
+            </if>
+            <if test="entrepreneurshipNumber!=null and entrepreneurshipNumber!=''">
+                entrepreneurship_number,
+            </if>
+            <if test="entrepreneurshipRegisteredCapital!=null and entrepreneurshipRegisteredCapital!=''">
+                entrepreneurship_registered_capital,
+            </if>
+            <if test="entrepreneurshipDirection!=null">
+                entrepreneurship_direction,
+            </if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="entrepreneurshipName!=null">
+                #{entrepreneurshipName},
+            </if>
+            <if test="entrepreneurshipChairman!=null">
+                #{entrepreneurshipChairman},
+            </if>
+            <if test="entrepreneurshipCeo!=null">
+                #{entrepreneurshipCeo},
+            </if>
+            <if test="entrepreneurshipCto!=null">
+                #{entrepreneurshipCto},
+            </if>
+            <if test="entrepreneurshipCfo!=null">
+                #{entrepreneurshipCfo},
+            </if>
+            <if test="entrepreneurshipNumber!=null and entrepreneurshipNumber!=''">
+                #{entrepreneurshipNumber},
+            </if>
+            <if test="entrepreneurshipRegisteredCapital!=null and entrepreneurshipRegisteredCapital!=''">
+                #{entrepreneurshipRegisteredCapital},
+            </if>
+            <if test="entrepreneurshipDirection!=null">
+                #{entrepreneurshipDirection},
+            </if>
+        </trim>
+    </insert>
+</mapper>

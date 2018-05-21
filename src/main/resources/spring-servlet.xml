@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        <!-- 扫描特定的类 -->
+	<!-- 启用spring mvc 注解 -->
+	<context:annotation-config />
+	<context:component-scan base-package="sau.project.*.controller" />
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />  
+	<bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />  
+	<!-- 配置HandlerMapping -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"></bean>
+	<!-- 视图解析器 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+        <property name="suffix" value=".jsp"></property>  
+        <property name="prefix" value="/WEB-INF/view/"></property>
+    </bean>  
+    <!--json格式数据转换的配置  -->
+     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"
+         p:ignoreDefaultModelOnRedirect="true">
+         <property name="messageConverters">
+             <list>
+                 <bean
+                     class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+             </list>
+         </property>
+     </bean>
+    <!-- 开启注解 -->
+    <mvc:annotation-driven></mvc:annotation-driven> 
+	<bean id="multiPartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="5000000" />
+	</bean>
+	<!-- 攔截器 -->
+	<mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/*.do" />
+            <bean class="sau.project.common.interceptor.AuInterceptor"></bean>
+        </mvc:interceptor>
+	</mvc:interceptors>
+</beans>

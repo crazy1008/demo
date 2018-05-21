@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sau.project.employers.dao.EmployersDao">
+    <resultMap id="groupCodeMap" type="groupCode">
+        <id column="id" property="id"></id>
+        <result column="student_id" property="studentId"></result>
+        <result column="job_position_id" property="jobPositionId"></result>
+        <result column="judge_appropriate" property="judgeAppropriate"></result>
+    </resultMap>
+<insert id="insertGroupCode" parameterType="groupCode">
+INSERT INTO t_group_code
+<trim prefix="(" suffix=")" suffixOverrides=",">
+    <if test="studentId!=null">
+        student_id,
+    </if>
+    <if test="jobPositionId!=null">
+        job_position_id,
+    </if>
+    <if test="judgeAppropriate!=null">
+        judge_appropriate,
+    </if>
+</trim>
+    <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+        <if test="studentId!=null">
+            #{studentId},
+        </if>
+        <if test="jobPositionId!=null">
+            #{jobPositionId},
+        </if>
+        <if test="judgeAppropriate!=null">
+            #{judgeAppropriate},
+        </if>
+    </trim>
+</insert>
+    <select id="selectGroup" parameterType="groupCode" resultType="java.lang.String">
+        SELECT judge_appropriate
+        FROM t_group_code
+        WHERE student_id =#{studentId} AND job_position_id =#{jobPositionId}
+    </select>
+</mapper>

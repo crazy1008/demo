@@ -1,0 +1,85 @@
+.table-bordered > tbody > tr > td {
+    border: 1px solid #0c0b0b;
+}
+
+.table-bordered > thead > tr > th {
+    border: 1px solid #0c0b0b;
+}
+
+.table > thead:first-child > tr:first-child > th {
+    border-top: 1px solid #0c0b0b;
+}
+
+input {
+    height: 25px;
+}
+
+label {
+    font-size: 16px;
+    font-weight: normal;
+}
+thead>tr>th{
+    font-weight: normal;
+    color: #c55555;
+}
+label.control-label {
+    font-size: 20px;
+    font-weight: normal;
+    padding-left: 1px;
+}
+input[type="text"] {
+    height: 32px;
+}
+label.error {
+    font-size: 14px;
+    font-weight: normal;
+    color: red;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    -webkit-text-fill-color: #333 !important;
+}
+.form-control[readonly]{
+    background-color: white;
+}
+.dropdown-submenu {
+    position: relative;
+}
+.dropdown-submenu > .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+}
+.dropdown-submenu > a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+.dropdown-submenu:hover > a:after {
+    border-left-color: #fff;
+}
+.dropdown-submenu.pull-left {
+    float: none;
+}
+.dropdown-submenu.pull-left > .dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
